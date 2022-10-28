@@ -1,4 +1,4 @@
-all: linkedlist.a
+all: clean linkedlist.a
 	cc -g -Wall -Wextra linkedlist_main.c -L. -l:linkedlist.a -o linkedlist_main
 
 linkedlist.a: linkedlist.o
