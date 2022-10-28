@@ -2,6 +2,18 @@
 #include <stdint.h>
 #include "linkedlist.h"
 
+union void_cast
+{
+    void *p;
+    int v;
+};
+
+int void_to_int(void *p) {
+    union void_cast x;
+    x.p = p;
+    return x.v;
+}
+
 int reader(void **container, void *value)
 {
 	int **ctr = (int **) container;
@@ -24,7 +36,7 @@ void ll_print(struct linked_list *list)
 
 	while (curr != NULL) {
 		//printf("curr=%p\n", curr);
-		printf("%d\n", curr->value);
+		printf("%d\n", void_to_int(curr->value));
 		curr = curr->next;
 	}
 
@@ -40,20 +52,22 @@ int main()
 	linked_list_append(list, (int *) 11);
 	linked_list_append(list, (int *) 12);
 
-	printf("list size=%d\n", list->length);
+	printf("list size=%ld\n", list->length);
 
 	size_t offset = 0;
-	int val = 0;
-
-	int retval = 0;
+	void *val = 0;
 
 	linked_list_read(list, &val, offset);
-	printf("list[%d] = %d\n", offset, val);
-
+	printf("list[%ld] = %d\n", offset, void_to_int(val));
 	offset++;
 
-	linked_list_read(list, &val, offset); 
-	printf("list[%d] = %d\n", offset, val);
+	linked_list_read(list, &val, offset);
+	printf("list[%ld] = %d\n", offset, void_to_int(val));
+	offset++;
+
+	linked_list_read(list, &val, offset);
+	printf("list[%ld] = %d\n", offset, void_to_int(val));
+
 
 	//ll_print(list);
 	//linked_list_destroy(list);
