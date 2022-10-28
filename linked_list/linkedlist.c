@@ -99,7 +99,7 @@ linked_list_destroy(struct linked_list *list)
 }
 
 int
-linked_list_read(struct linked_list *list, void **container, size_t offset)
+linked_list_read(struct linked_list *list, void *container, size_t offset)
 {
 	if (list == NULL || offset >= list->length) {
 		return -1;

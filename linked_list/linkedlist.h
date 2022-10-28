@@ -2,7 +2,7 @@
 #ifndef AD_LINKEDLIST_H
 #define AD_LINKEDLIST_H 1
 
-typedef	int (*reader_function)(void **, void *);
+typedef	int (*reader_function)(void *, void *);
 
 struct linked_list_node {
 	void	*value;
@@ -22,7 +22,7 @@ struct	linked_list_node *
 linked_list_node_create(void *value);
 
 int
-linked_list_read(struct linked_list *list, void** container, size_t index);
+linked_list_read(struct linked_list *list, void* container, size_t index);
 
 int
 linked_list_append(struct linked_list *list, void *value);
